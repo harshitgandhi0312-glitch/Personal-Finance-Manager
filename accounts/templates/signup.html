@@ -1,0 +1,151 @@
+{% include 'header.html' %}
+
+<style>
+  body {
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  .signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--navbar-height));
+    padding: 3rem 1rem;
+  }
+
+  .signup-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 14px;
+    border: 1px solid rgba(8, 20, 40, 0.04);
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(16, 24, 40, 0.08);
+    padding: 2.2rem 2rem;
+    transition: 0.3s ease;
+  }
+
+  .signup-card:hover {
+    box-shadow: 0 12px 40px rgba(16, 24, 40, 0.12);
+  }
+
+  .signup-card h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #0b2235;
+    font-weight: 700;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #0f2a3a;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid rgba(8, 20, 40, 0.06);
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    border-color: rgba(13, 110, 253, 0.35);
+  }
+
+  .btn-success {
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    transition: background 0.2s ease-in-out;
+  }
+
+  .btn-success:hover {
+    background-color: #157347;
+  }
+
+  .alert {
+    border-radius: 10px;
+  }
+
+  .show-pass-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .position-relative {
+    position: relative !important;
+  }
+</style>
+
+<div class="signup-container">
+  <form method="post" action="/users/signup/" class="signup-card">
+    {% csrf_token %}
+    <h3>Create your account</h3>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input name="email" type="email" class="form-control" id="email" placeholder="name@example.com" required />
+    </div>
+
+    <div class="mb-3 position-relative">
+      <label for="password" class="form-label">Password</label>
+      <input name="password" type="password" class="form-control" id="password" placeholder="Enter strong password" required />
+      <button type="button" class="show-pass-btn" id="togglePassword">Show</button>
+    </div>
+
+    <div class="mb-4 position-relative">
+      <label for="confirm-password" class="form-label">Confirm Password</label>
+      <input name="confirm-password" type="password" class="form-control" id="confirm-password" placeholder="Re-enter password" required />
+      <button type="button" class="show-pass-btn" id="toggleConfirmPassword">Show</button>
+    </div>
+
+    <div class="d-grid mb-3">
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+
+    <div class="text-center mt-2">
+      <p class="mb-0 text-muted">Already have an account? <a href="/users/login/" class="text-decoration-none">Login</a></p>
+    </div>
+
+    {% if success is not None %}
+    <div class="alert alert-success alert-dismissible fade show mt-4 shadow-sm" role="alert">
+      {{ success }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% elif error is not None %}
+    <div class="alert alert-danger alert-dismissible fade show mt-4 shadow-sm" role="alert">
+      {{ error }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+<script>
+  // Show/Hide password toggles
+  const togglePassword = document.getElementById("togglePassword");
+  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+  const passwordField = document.getElementById("password");
+  const confirmField = document.getElementById("confirm-password");
+
+  togglePassword.addEventListener("click", function () {
+    const type = passwordField.type === "password" ? "text" : "password";
+    passwordField.type = type;
+    this.textContent = type === "password" ? "Show" : "Hide";
+  });
+
+  toggleConfirmPassword.addEventListener("click", function () {
+    const type = confirmField.type === "password" ? "text" : "password";
+    confirmField.type = type;
+    this.textContent = type === "password" ? "Show" : "Hide";
+  });
+</script>
+
+{% include 'footer.html' %}

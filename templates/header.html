@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --navbar-height: 68px; /* fallback value */
+    }
+
+    /* Basic brand styling */
+    .navbar .brand-logo {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #0d6efd, #0a58ca);
+      box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+      margin-right: 8px;
+    }
+
+    .navbar .brand-text {
+      font-weight: 700;
+      color: #0b2235;
+      font-size: 1rem;
+    }
+
+    /* ensure content doesn't pass underneath the fixed navbar */
+    body {
+      padding-top: var(--navbar-height);
+      min-height: 100vh;
+      background: #f8fbff;
+    }
+
+    /* thin border under navbar for subtle separation */
+    .navbar {
+      border-bottom: 1px solid rgba(8, 20, 40, 0.03);
+    }
+
+    /* small adjustments so nav links don't look cramped on large screens */
+    .navbar .nav-link {
+      padding-left: 0.6rem;
+      padding-right: 0.6rem;
+    }
+
+    /* make sure focus style is visible for toggler (accessibility) */
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.18);
+    }
+
+    @media (max-width: 576px) {
+      :root {
+        --navbar-height: 78px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed top navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center">
+        <span class="brand-logo" aria-hidden="true">PF</span>
+        <span class="brand-text">Personal Finance</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          {% if request.COOKIES.email %}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/logout">Log out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/signup">Sign up</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Bootstrap Bundle (includes Popper) - required for collapse to work -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- small script: read actual navbar height and set CSS var so body padding always matches -->
+  <script>
+    (function () {
+      function syncNavbarHeight() {
+        var nav = document.querySelector('.navbar');
+        if (!nav) return;
+        var h = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--navbar-height', h + 'px');
+      }
+      // run on load and on resize
+      syncNavbarHeight();
+      window.addEventListener('resize', syncNavbarHeight);
+    })();
+  </script>
+
+  <main>

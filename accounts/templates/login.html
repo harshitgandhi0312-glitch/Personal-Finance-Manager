@@ -1,0 +1,282 @@
+{% include 'header.html' %}
+<style>
+  :root {
+    --accent: #0d6efd;
+    --card-radius: 14px;
+    --card-shadow: 0 12px 28px rgba(16,24,40,0.08);
+  }
+
+  /* Page shell */
+  body {
+    background: linear-gradient(180deg,#f8fbff 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #0b2235;
+  }
+
+  /* Card layout */
+  .login-wrap {
+    width: 100%;
+    max-width: 920px;
+  }
+
+  .login-card {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    background: #fff;
+    border: 1px solid rgba(8,20,40,0.04);
+  }
+
+  /* Left illustration area */
+  .login-visual {
+    padding: 36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    background:
+      linear-gradient(180deg, rgba(13,110,253,0.04), rgba(13,110,253,0.01));
+  }
+  .visual-content {
+    max-width: 360px;
+  }
+  .visual-title {
+    font-size:1.35rem;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#073146;
+  }
+  .visual-sub {
+    color:#315b6a;
+    font-size:0.95rem;
+    line-height:1.4;
+  }
+  .visual-illu{
+    width:100%;
+    max-width:320px;
+    display:block;
+    margin-top:18px;
+    border-radius:10px;
+    background: linear-gradient(180deg,#ffffff,#f6f9ff);
+    border:1px solid rgba(8,20,40,0.03);
+    padding:14px;
+  }
+
+  /* Right form area */
+  .login-form {
+    padding: 34px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:6px;
+  }
+  .brand .logo {
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    background:var(--accent);
+    border-radius:10px;
+    font-weight:700;
+    box-shadow: 0 8px 24px rgba(13,110,253,0.12);
+  }
+  .login-title {
+    margin:0 0 6px 0;
+    font-size:1.25rem;
+    font-weight:700;
+  }
+  .login-desc {
+    font-size:0.92rem;
+    color:#4b6b78;
+    margin-bottom:18px;
+  }
+
+  .form-control {
+    border-radius:10px;
+    padding:12px 14px;
+    border:1px solid rgba(8,20,40,0.06);
+  }
+  .form-control:focus{
+    box-shadow: 0 10px 30px rgba(13,110,253,0.06);
+    border-color: rgba(13,110,253,0.35);
+  }
+
+  .btn-primary {
+    border-radius:10px;
+    padding:11px 14px;
+    font-weight:600;
+  }
+
+  .helper-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-top:8px;
+    margin-bottom:8px;
+    color:#5b7a84;
+    font-size:0.92rem;
+  }
+
+  .small-link { font-size:0.92rem; color:#2962ff; text-decoration:none; }
+  .small-link:hover { text-decoration:underline; }
+
+  /* Alert style if error */
+  .login-alert {
+    margin:0 0 12px 0;
+    padding:10px 12px;
+    border-radius:8px;
+    background:#fff4f4;
+    border:1px solid rgba(122,31,31,0.08);
+    color:#7a1f1f;
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .login-card { grid-template-columns: 1fr; }
+    .login-visual { padding:22px; }
+    .login-form { padding:22px; }
+  }
+
+  @media (max-width: 420px) {
+    .brand .logo { width:40px; height:40px; }
+    .login-wrap { padding:0 6px; }
+  }
+</style>
+
+<div class="login-wrap" role="main" aria-labelledby="signin-heading">
+  <div class="login-card" role="region" aria-label="Login card">
+    <!-- Left visual / info -->
+    <div class="login-visual" aria-hidden="true">
+      <div class="visual-content text-start">
+        <div class="visual-title">Personal Finance Manager</div>
+        <div class="visual-sub">Quickly manage budgets, track expenses, and view insights — secure and private.</div>
+        <!-- simple SVG/PNG illustration placeholder -->
+        <div class="visual-illu">
+          <!-- lightweight inline SVG illustration (you can replace with your image) -->
+          <svg width="100%" height="140" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Finance illustration">
+            <rect x="12" y="12" width="576" height="196" rx="12" fill="#f8fbff"/>
+            <g transform="translate(32,28)">
+              <rect x="12" y="8" width="130" height="84" rx="8" fill="#ffffff" stroke="#e6eefc"/>
+              <rect x="170" y="28" width="200" height="44" rx="8" fill="#ffffff" stroke="#e6eefc"/>
+              <rect x="390" y="12" width="140" height="140" rx="8" fill="#ffffff" stroke="#e6eefc"/>
+              <path d="M38 110 L80 58 L120 98 L160 36 L200 92" stroke="#0d6efd" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="login-form">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">PF</div>
+          <div>
+            <div style="font-weight:700;">Personal Finance</div>
+            <div style="font-size:0.84rem;color:#6b8893;">Account access</div>
+          </div>
+        </div>
+
+        <h2 id="signin-heading" class="login-title">Log in</h2>
+        <p class="login-desc">Use your email and password to securely sign in.</p>
+      </div>
+
+      <!-- Error block -->
+      {% if error is not None %}
+      <div class="login-alert" role="alert">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="#7a1f1f" stroke-width="0.8" fill="none"></path>
+          <path d="M11 7h2v6h-2zM11 15h2v2h-2z" fill="#7a1f1f"></path>
+        </svg>
+        <div>{{ error }}</div>
+      </div>
+      {% endif %}
+
+      <form method="post" action="/users/login/" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="email" class="form-label small">Email address</label>
+          <input id="email" name="email" type="email" class="form-control" placeholder="you@example.com" required autocomplete="username" autofocus>
+        </div>
+
+        <div class="mb-2">
+          <label for="password" class="form-label small">Password</label>
+          <div class="input-group">
+            <input id="password" name="password" type="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password" aria-describedby="toggle-pass-btn">
+            <button class="btn btn-outline-secondary" type="button" id="toggle-pass-btn" aria-pressed="false" title="Show password">Show</button>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="remember" name="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div>
+          <div><a class="small-link" href="/users/password-reset/">Forgot password?</a></div>
+        </div>
+
+        <div class="d-grid mt-2">
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-center mt-3">
+          <a class="btn btn-outline-secondary" href="/users/signup/">Create account</a>
+          <a class="btn btn-outline-secondary" href="/">Back home</a>
+        </div>
+      </form>
+
+      <div style="font-size:0.85rem;color:#718a92;margin-top:14px;text-align:center;">
+        By signing in you agree to our <a href="/terms/">Terms</a>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show/hide password toggle
+  (function(){
+    const pwd = document.getElementById('password');
+    const btn = document.getElementById('toggle-pass-btn');
+    if (!pwd || !btn) return;
+    btn.addEventListener('click', () => {
+      const isHidden = pwd.type === 'password';
+      pwd.type = isHidden ? 'text' : 'password';
+      btn.textContent = isHidden ? 'Hide' : 'Show';
+      btn.setAttribute('aria-pressed', String(isHidden));
+      pwd.focus({preventScroll:true});
+    });
+  })();
+
+  // Basic client-side form validation UX (friendly)
+  (function(){
+    const form = document.querySelector('form[method="post"]');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      const email = form.querySelector('input[name="email"]');
+      const pwd = form.querySelector('input[name="password"]');
+      if(!email.value.trim() || !pwd.value.trim()){
+        e.preventDefault();
+        email.reportValidity();
+        pwd.reportValidity();
+      }
+    });
+  })();
+</script>
+{% include 'footer.html' %}
