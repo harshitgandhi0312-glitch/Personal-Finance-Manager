@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password,check_password
 
@@ -6,7 +6,6 @@ from .models import Role,User
 from utils.validators import email_validator, password_validator
 
 
-#Login Page
 
 def login_page(request:HttpRequest):
     if request.method == "GET":
